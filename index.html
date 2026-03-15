@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المنصة الذكية لحساب زكاة الفطر | 2026 | من إنجاز الأستاذ هيثم بركان</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Tajawal', 'sans-serif'],
+                    },
+                    colors: {
+                        islamic: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            500: '#22c55e',
+                            700: '#15803d',
+                            900: '#14532d',
+                            gold: '#d4af37'
+                        },
+                        hb: {
+                            blue: '#4169e1', /* Royal Blue */
+                            orange: '#f97316' /* Orange */
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #f8fafc; }
+        .pattern-bg {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2315803d' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-800 antialiased pattern-bg min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="bg-islamic-900 text-white shadow-lg border-b-4 border-islamic-gold">
+        <div class="container mx-auto px-4 py-6 text-center">
+            <h1 class="text-2xl md:text-4xl font-bold mb-3 flex justify-center items-center gap-4">
+                <!-- HB Logo -->
+                <div class="flex-shrink-0 flex items-center justify-center w-14 h-14 rounded-full bg-hb-blue border-4 border-hb-orange text-white font-bold text-2xl tracking-wider shadow-lg" style="font-family: Arial, sans-serif;">
+                    HB
+                </div>
+                المنصة الذكية لحساب زكاة الفطر
+            </h1>
+            <p class="text-islamic-100 text-sm md:text-base leading-relaxed">
+                تطبيق فقهي تقني لحساب زكاة الفطر طعاماً ونقداً لعام 1447هـ / 2026م<br>
+                <span class="inline-block mt-2 bg-islamic-700 px-4 py-1 rounded-full text-islamic-gold font-bold border border-islamic-500 shadow-sm">من إنجاز الأستاذ هيثم بركان</span>
+            </p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8 flex-grow max-w-4xl">
+        
+        <!-- Fiqh Info Box -->
+        <div class="bg-white rounded-xl shadow-md p-6 mb-8 border-r-4 border-islamic-500">
+            <h2 class="text-xl font-bold text-islamic-900 mb-3 flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                إضاءة فقهية
+            </h2>
+            <p class="text-gray-600 leading-relaxed text-sm md:text-base">
+                زكاة الفطر فريضة واجبة على كل مسلم، صاعاً من طعام. الأصل فيها إخراجها من غالب قوت البلد وقد تم توفير أوزان دقيقة لمختلف الأصناف بناءً على أحدث القياسات الفقهية للصاع النبوي. وقد أجاز السادة الحنفية وبعض المجامع الفقهية المعاصرة إخراجها نقداً (بالقيمة) للحاجة.
+            </p>
+        </div>
+
+        <!-- Calculator Form -->
+        <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+            
+            <!-- Step 1: Country Selection -->
+            <div class="mb-8">
+                <label for="country" class="block text-gray-700 font-bold mb-2">1. اختر بلد الإقامة:</label>
+                <select id="country" onchange="handleCountryChange()" class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-islamic-500 transition shadow-sm appearance-none bg-white">
+                    <option value="" disabled selected>-- الرجاء اختيار البلد --</option>
+                    <!-- Options populated by JS -->
+                </select>
+                <div id="fiqh-warning" class="hidden mt-3 bg-yellow-50 border-r-4 border-yellow-500 text-yellow-800 p-4 rounded-l-lg text-sm">
+                    <strong>تنبيه فقهي:</strong> اللجان الرسمية وكبار العلماء في هذا البلد لا يحبذون إخراج الزكاة نقداً، ويرون وجوب إخراجها طعاماً اتباعاً لظاهر السنة النبوية، ولا يجزئ إخراجها نقداً إلا عند الضرورة القصوى.
+                </div>
+            </div>
+
+            <!-- Step 2: Calculation Mode -->
+            <div id="mode-section" class="mb-8 hidden">
+                <label class="block text-gray-700 font-bold mb-3">2. طريقة إخراج الزكاة:</label>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <button id="btn-mode-food" onclick="setMode('food')" class="py-3 px-4 rounded-lg border-2 border-islamic-500 bg-islamic-50 text-islamic-700 font-bold transition hover:bg-islamic-100 flex items-center justify-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z" clip-rule="evenodd" /></svg>
+                        محاكاة بالأوزان (طعام)
+                    </button>
+                    <button id="btn-mode-cash" onclick="setMode('cash')" class="py-3 px-4 rounded-lg border-2 border-gray-200 text-gray-600 font-bold transition hover:bg-gray-50 flex items-center justify-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z" /><path fill-rule="evenodd" d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z" clip-rule="evenodd" /></svg>
+                        نقداً (قيمة نقدية)
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 3: Calculator Container -->
+            <div id="calculator-container" class="hidden">
+                
+                <!-- Food Mode -->
+                <div id="food-calc" class="hidden animate-fade-in">
+                    <h3 class="text-lg font-bold text-gray-800 border-b pb-2 mb-4">تفاصيل إخراج الزكاة طعاماً</h3>
+                    
+                    <div class="mb-4">
+                        <label for="num-people-food" class="block text-gray-700 mb-2">عدد الأشخاص (أفراد الأسرة):</label>
+                        <input type="number" id="num-people-food" min="1" max="20" value="1" onchange="generateFoodRows()" class="w-full md:w-1/3 border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-islamic-500 text-center text-lg">
+                    </div>
+
+                    <div class="bg-gray-50 p-4 rounded-lg border border-gray-200 mb-6">
+                        <div id="food-rows-container" class="space-y-4 max-h-96 overflow-y-auto pr-2">
+                            <!-- Rows generated by JS -->
+                        </div>
+                    </div>
+
+                    <div class="bg-islamic-50 border border-islamic-200 rounded-lg p-5 text-center">
+                        <h4 class="text-gray-600 font-bold mb-2">الملخص الإجمالي</h4>
+                        <div class="flex flex-col md:flex-row justify-center gap-6 items-center">
+                            <div class="text-center">
+                                <span class="block text-sm text-gray-500">إجمالي الوزن الدقيق</span>
+                                <span id="total-weight" class="text-2xl font-bold text-islamic-700">0 كغ</span>
+                            </div>
+                            <div class="hidden md:block w-px h-10 bg-gray-300"></div>
+                            <div class="text-center">
+                                <span class="block text-sm text-gray-500">التكلفة الإجمالية (تقديرية)</span>
+                                <span id="total-food-cost" class="text-3xl font-extrabold text-islamic-900">0.00</span>
+                                <span class="currency-label text-sm text-gray-600"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cash Mode -->
+                <div id="cash-calc" class="hidden animate-fade-in">
+                    <h3 class="text-lg font-bold text-gray-800 border-b pb-2 mb-4">حساب زكاة الفطر نقداً (2026 م)</h3>
+                    <div class="bg-blue-50 text-blue-800 p-4 rounded-lg mb-6 text-sm flex gap-3 items-start border border-blue-100">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        <p>تستند هذه الحسابات إلى القيم المرجعية التقديرية المعلن عنها من الجهات الرسمية لعام 2026م. القيمة المقدرة للفرد الواحد في <span id="lbl-country-name" class="font-bold"></span> هي: <span id="lbl-country-value" class="font-bold text-blue-900"></span> <span class="currency-label"></span>.</p>
+                    </div>
+
+                    <div class="flex flex-col md:flex-row items-center gap-4 mb-6">
+                        <div class="w-full md:w-1/2">
+                            <label for="num-people-cash" class="block text-gray-700 mb-2">عدد أفراد الأسرة (بمن فيهم الجنين إن أمكن):</label>
+                            <input type="number" id="num-people-cash" min="1" max="50" value="1" oninput="calculateCash()" class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-islamic-500 text-center text-xl">
+                        </div>
+                    </div>
+
+                    <div class="bg-islamic-900 text-white rounded-xl p-6 text-center shadow-inner">
+                        <h4 class="text-islamic-100 font-medium mb-1">المبلغ الواجب إخراجه</h4>
+                        <div class="flex justify-center items-end gap-2">
+                            <span id="total-cash-cost" class="text-5xl font-extrabold text-islamic-gold">0</span>
+                            <span class="currency-label text-xl pb-1 text-islamic-100"></span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer & CV Section -->
+    <footer class="bg-gray-800 text-gray-300 py-12 border-t-4 border-islamic-700 mt-auto">
+        <div class="container mx-auto px-4 max-w-6xl">
+            
+            <!-- Developer Bio Header -->
+            <div class="text-center mb-10">
+                <div class="flex items-center justify-center gap-4 mb-4">
+                    <div class="flex items-center justify-center w-16 h-16 rounded-full bg-hb-blue border-4 border-hb-orange text-white font-bold text-2xl tracking-wider shadow-lg" style="font-family: Arial, sans-serif;">
+                        HB
+                    </div>
+                </div>
+                <h2 class="font-bold text-3xl text-white mb-2" style="font-family: 'Tajawal', serif;">Ahmed Haithem BERKANE</h2>
+                <h3 class="text-islamic-500 text-xl font-medium mb-3">أحمد هيثم بركان</h3>
+                <p class="text-gray-400 text-sm tracking-wide">Consultant Senior | Architecte Logiciel & IA<br>Expert en Ingénierie Pédagogique (CIP)</p>
+                <div class="w-24 h-1 bg-islamic-gold mx-auto mt-4 rounded"></div>
+                <p class="mt-4 text-sm text-gray-400 max-w-2xl mx-auto italic">"لستُ مجرد مطور، بل شريك استراتيجي. أجمع بين الخبرة التقنية العالية في الذكاء الاصطناعي وتطوير الويب، وبين الشغف بالجانب البيداغوجي لتقديم حلول متكاملة."</p>
+            </div>
+
+            <!-- CV Details Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 bg-gray-900 p-8 rounded-xl shadow-lg border border-gray-700 mb-8">
+                
+                <!-- Experience -->
+                <div class="md:col-span-1">
+                    <h4 class="text-white font-bold mb-4 flex items-center gap-2 border-b border-gray-700 pb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-islamic-500" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clip-rule="evenodd" /><path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z" /></svg>
+                        المسار المهني (Expérience)
+                    </h4>
+                    <ul class="space-y-4 text-sm">
+                        <li>
+                            <div class="text-islamic-gold font-bold">2021 - الحاضر</div>
+                            <div class="font-medium text-white">مستشار مستقل وخبير IA</div>
+                            <div class="text-gray-400 text-xs mt-1">تطوير حلول الذكاء الاصطناعي التنبؤية، تدريب، وتوجيه الشركات.</div>
+                        </li>
+                        <li>
+                            <div class="text-islamic-gold font-bold">2021 - الحاضر</div>
+                            <div class="font-medium text-white">أستاذ متخصص في التكوين والتعليم المهني</div>
+                            <div class="text-gray-400 text-xs mt-1">مكلف بالهندسة البيداغوجية ونقل المهارات المعقدة.</div>
+                        </li>
+                        <li>
+                            <div class="text-islamic-gold font-bold">2014 - 2021</div>
+                            <div class="font-medium text-white">أستاذ متخصص رتبة 02 (PSFEP 2)</div>
+                            <div class="text-gray-400 text-xs mt-1">تأطير مشاريع التخرج وتدريس هندسة البرمجيات.</div>
+                        </li>
+                        <li>
+                            <div class="text-islamic-gold font-bold">2019 - 2020</div>
+                            <div class="font-medium text-white">Directeur Projet Métier | Condor Academy</div>
+                            <div class="text-gray-400 text-xs mt-1">قيادة التحول الرقمي وإدارة أنظمة ERP.</div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Technical Skills -->
+                <div class="md:col-span-1">
+                    <h4 class="text-white font-bold mb-4 flex items-center gap-2 border-b border-gray-700 pb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-islamic-500" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+                        المهارات التقنية (Compétences)
+                    </h4>
+                    <div class="space-y-4">
+                        <div>
+                            <span class="text-xs text-blue-100 bg-blue-900 px-2 py-1 rounded inline-block mb-1">IA & Data</span>
+                            <p class="text-gray-400 text-xs leading-relaxed">IA Générative (LLM, RAG), Machine Learning, Data Analysis (Pandas, SQL), Business Intelligence</p>
+                        </div>
+                        <div>
+                            <span class="text-xs text-islamic-100 bg-islamic-900 px-2 py-1 rounded inline-block mb-1">Architecture & Dev Web</span>
+                            <p class="text-gray-400 text-xs leading-relaxed">Full-Stack (Laravel, Python/Django, JS), Base de Données (Oracle, SQL Server)</p>
+                        </div>
+                        <div>
+                            <span class="text-xs text-purple-100 bg-purple-900 px-2 py-1 rounded inline-block mb-1">Systèmes & Gouvernance</span>
+                            <p class="text-gray-400 text-xs leading-relaxed">ERP (SAP/Success Factors), Sécurité & Gouvernance des Données</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Education & Contact -->
+                <div class="md:col-span-1">
+                    <h4 class="text-white font-bold mb-4 flex items-center gap-2 border-b border-gray-700 pb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-islamic-500" viewBox="0 0 20 20" fill="currentColor"><path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z" /></svg>
+                        التكوين (Formation)
+                    </h4>
+                    <ul class="space-y-3 text-sm mb-6">
+                        <li>
+                            <div class="text-white font-medium">Expertise Chargé en Ingénierie Pédagogique (CIP)</div>
+                        </li>
+                        <li>
+                            <div class="text-white font-medium">ماستر إعلام آلي (شبكات ووسائط)</div>
+                            <div class="text-gray-400 text-xs">جامعة البشير الإبراهيمي (2013)</div>
+                        </li>
+                        <li>
+                            <div class="text-white font-medium">ليسانس إعلام آلي (ذكاء الأعمال)</div>
+                            <div class="text-islamic-gold text-xs">Major de Promotion (2011)</div>
+                        </li>
+                    </ul>
+
+                    <h4 class="text-white font-bold mb-3 flex items-center gap-2 border-b border-gray-700 pb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-islamic-500" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clip-rule="evenodd" /></svg>
+                        للتواصل (Contact)
+                    </h4>
+                    <div class="text-xs text-gray-400 space-y-2">
+                        <div class="flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-islamic-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg> haithem-berkane@outlook.fr</div>
+                        <div class="flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-islamic-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg> 
+                            <span dir="ltr" class="font-sans font-medium tracking-widest text-[13px]">+213 699 10 25 23</span>
+                        </div>
+                        <div class="flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-islamic-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg> Bordj Bou Arréridj, Algérie</div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Achievements Section -->
+            <div class="bg-gray-800 rounded-xl p-6 border border-gray-700 shadow-md">
+                <h4 class="text-white font-bold mb-6 flex items-center gap-2 border-b border-gray-600 pb-3 text-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-hb-orange" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" /></svg>
+                    الإنجازات والحلول البرمجية (Réalisations Phares)
+                </h4>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-gray-900 p-4 rounded-lg border-l-4 border-hb-blue">
+                        <h5 class="text-islamic-gold font-bold mb-2">Moufid BI</h5>
+                        <p class="text-sm text-gray-400">منصة دقيقة ومتقدمة للتشخيص المالي والمحاسبي (Intelligence Financière)، توفر تحليلاً آلياً للأداء وتدقيقاً للحسابات للشركات والمؤسسات.</p>
+                    </div>
+                    <div class="bg-gray-900 p-4 rounded-lg border-l-4 border-islamic-500">
+                        <h5 class="text-islamic-gold font-bold mb-2">ASR PRO</h5>
+                        <p class="text-sm text-gray-400">نظام متكامل وآمن لإدارة وتقييم الامتحانات والمسابقات عبر الإنترنت (Évaluation en Ligne)، لرقمنة عمليات التقييم بدقة وموثوقية.</p>
+                    </div>
+                    <div class="bg-gray-900 p-4 rounded-lg border-l-4 border-hb-orange">
+                        <h5 class="text-islamic-gold font-bold mb-2">Master Algo Pro</h5>
+                        <p class="text-sm text-gray-400">أداة تكنولوجية متطورة مخصصة لتعليم ومحاكاة الخوارزميات (Pédagogie Algorithmique)، لتسهيل نقل المفاهيم المنطقية والبرمجية.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sadaqah Jariyah / Dua -->
+            <div class="mt-8 bg-gray-900 border border-gray-700 rounded-xl p-6 text-center shadow-lg relative overflow-hidden">
+                <div class="absolute inset-0 opacity-10" style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23d4af37\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+                <div class="relative z-10">
+                    <h4 class="text-islamic-gold text-xl font-bold mb-3 flex justify-center items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
+                        صدقة جارية ودعاء
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
+                    </h4>
+                    <p class="text-gray-300 leading-relaxed text-sm md:text-base max-w-3xl mx-auto font-medium" style="line-height: 1.8;">
+                        « اللهم اغفر لوالدِ أخينا "أحمد هيثم بركان" وارحمه، وعافه واعف عنه، وأكرم نزله، ووسع مدخله، واغسله بالماء والثلج والبرد، ونقه من الذنوب والخطايا كما ينقى الثوب الأبيض من الدنس، وأبدله داراً خيراً من داره، وأهلاً خيراً من أهله، وأدخله الجنة، وأعذه من عذاب القبر ومن عذاب النار. اللهم اجعل قبره روضة من رياض الجنة، واجعل هذا العمل خالصاً لوجهك الكريم وثواباً موصولاً في صحيفته يا أرحم الراحمين ».
+                    </p>
+                </div>
+            </div>
+
+            <div class="mt-8 text-center text-xs text-gray-500">
+                حقوق النشر محفوظـة &copy; 2026 - صُنع بغاية التيسير على المسلمين
+            </div>
+        </div>
+    </footer>
+
+    <!-- Logic Script -->
+    <script>
+        // 1. Data Definitions
+        // القيم النقدية هي قيم مرجعية تقديرية لعام 2026م بناءً على السياق الاقتصادي
+        const countriesData = {
+            "DZ": { name: "الجزائر", cashValue: 170, currency: "د.ج", prefersFood: false },
+            "TN": { name: "تونس", cashValue: 3.0, currency: "د.ت", prefersFood: false },
+            "MR": { name: "موريطانيا", cashValue: 200, currency: "أوقية", prefersFood: false },
+            "LY": { name: "ليبيا", cashValue: 10, currency: "د.ل", prefersFood: false },
+            "EG": { name: "مصر", cashValue: 50, currency: "ج.م", prefersFood: false },
+            "IQ": { name: "العراق", cashValue: 3000, currency: "د.ع", prefersFood: false },
+            "SA": { name: "المملكة العربية السعودية", cashValue: 25, currency: "ر.س", prefersFood: true },
+            "YE": { name: "اليمن", cashValue: 2000, currency: "ريال", prefersFood: true },
+            "OM": { name: "سلطنة عمان", cashValue: 1.5, currency: "ر.ع", prefersFood: true },
+            "SY": { name: "سوريا", cashValue: 20000, currency: "ل.س", prefersFood: false },
+            "LB": { name: "لبنان", cashValue: 300000, currency: "ل.ل", prefersFood: false },
+            "QA": { name: "قطر", cashValue: 15, currency: "ر.ق", prefersFood: true },
+            "BH": { name: "البحرين", cashValue: 1.5, currency: "د.ب", prefersFood: true },
+            "JO": { name: "الأردن", cashValue: 2.0, currency: "د.أ", prefersFood: false }
+        };
+
+        // الأوزان المتفق عليها شرعاً (بالكيلوغرام للصاع الواحد تقريباً) بناء على الجدول المرفق
+        const foodTypesData = {
+            "flour": { name: "الدقيق", weight: 2.000 },
+            "farina": { name: "الفرينة", weight: 1.400 },
+            "lentils": { name: "العدس", weight: 2.100 },
+            "white_beans": { name: "اللوبيا", weight: 2.060 },
+            "split_peas": { name: "الجلبانة المكسرة", weight: 2.240 },
+            "wheat": { name: "القمح", weight: 2.040 },
+            "raisins": { name: "الزبيب", weight: 1.640 },
+            "couscous": { name: "الكسكس", weight: 1.800 },
+            "mhamamsa": { name: "المحمصة", weight: 2.000 },
+            "dates": { name: "التمر", weight: 1.800 },
+            "chickpeas": { name: "الحمص", weight: 2.000 },
+            "rice": { name: "الأرز", weight: 2.300 }
+        };
+
+        // State Variables
+        let currentMode = 'food'; // 'food' or 'cash'
+        let selectedCountryKey = null;
+
+        // 2. Initialization
+        window.onload = () => {
+            const select = document.getElementById('country');
+            // Populate countries
+            for (const [key, data] of Object.entries(countriesData)) {
+                const option = document.createElement('option');
+                option.value = key;
+                option.textContent = data.name;
+                select.appendChild(option);
+            }
+        };
+
+        // 3. Handlers
+        function handleCountryChange() {
+            const select = document.getElementById('country');
+            selectedCountryKey = select.value;
+            const country = countriesData[selectedCountryKey];
+
+            // Update Currency Labels everywhere
+            document.querySelectorAll('.currency-label').forEach(el => el.textContent = country.currency);
+
+            // Show/Hide Fiqh Warning
+            const warningEl = document.getElementById('fiqh-warning');
+            if (country.prefersFood) {
+                warningEl.classList.remove('hidden');
+            } else {
+                warningEl.classList.add('hidden');
+            }
+
+            // Reveal Mode Selection
+            document.getElementById('mode-section').classList.remove('hidden');
+            document.getElementById('calculator-container').classList.remove('hidden');
+
+            // Update Cash Details Texts
+            document.getElementById('lbl-country-name').textContent = country.name;
+            document.getElementById('lbl-country-value').textContent = country.cashValue;
+
+            // Re-trigger calculations based on active mode
+            setMode(currentMode);
+        }
+
+        function setMode(mode) {
+            currentMode = mode;
+            
+            // Buttons Styling
+            const btnFood = document.getElementById('btn-mode-food');
+            const btnCash = document.getElementById('btn-mode-cash');
+
+            if (mode === 'food') {
+                btnFood.className = "py-3 px-4 rounded-lg border-2 border-islamic-500 bg-islamic-50 text-islamic-700 font-bold transition flex items-center justify-center gap-2";
+                btnCash.className = "py-3 px-4 rounded-lg border-2 border-gray-200 text-gray-600 font-bold transition hover:bg-gray-50 flex items-center justify-center gap-2 cursor-pointer";
+                
+                document.getElementById('food-calc').classList.remove('hidden');
+                document.getElementById('cash-calc').classList.add('hidden');
+                
+                generateFoodRows();
+            } else {
+                btnCash.className = "py-3 px-4 rounded-lg border-2 border-islamic-500 bg-islamic-50 text-islamic-700 font-bold transition flex items-center justify-center gap-2";
+                btnFood.className = "py-3 px-4 rounded-lg border-2 border-gray-200 text-gray-600 font-bold transition hover:bg-gray-50 flex items-center justify-center gap-2 cursor-pointer";
+                
+                document.getElementById('cash-calc').classList.remove('hidden');
+                document.getElementById('food-calc').classList.add('hidden');
+                
+                calculateCash();
+            }
+        }
+
+        // --- Food Logic ---
+        function generateFoodRows() {
+            const numPeople = parseInt(document.getElementById('num-people-food').value) || 1;
+            const container = document.getElementById('food-rows-container');
+            
+            // Generate food options HTML once
+            let foodOptionsHTML = '';
+            for (const [key, data] of Object.entries(foodTypesData)) {
+                foodOptionsHTML += `<option value="${key}">${data.name} (وزن الصاع: ${data.weight.toFixed(3)} كغ)</option>`;
+            }
+
+            // Preserve old values if possible
+            const oldPrices = [];
+            const oldTypes = [];
+            document.querySelectorAll('.food-price-input').forEach(inp => oldPrices.push(inp.value));
+            document.querySelectorAll('.food-type-select').forEach(sel => oldTypes.push(sel.value));
+
+            container.innerHTML = ''; // Clear
+
+            for (let i = 0; i < numPeople; i++) {
+                const defaultType = oldTypes[i] || Object.keys(foodTypesData)[0];
+                const defaultPrice = oldPrices[i] || '';
+
+                const row = document.createElement('div');
+                row.className = "flex flex-col md:flex-row gap-3 items-end md:items-center bg-white p-3 rounded border border-gray-100 shadow-sm";
+                row.innerHTML = `
+                    <div class="w-full md:w-auto font-bold text-islamic-700 bg-islamic-50 px-3 py-2 rounded">
+                        الشخص رقم ${i + 1}
+                    </div>
+                    <div class="w-full md:flex-1">
+                        <label class="block text-xs text-gray-500 mb-1">نوع المقتات (الطعام)</label>
+                        <select class="food-type-select w-full border border-gray-300 rounded px-2 py-2 focus:outline-none focus:border-islamic-500 text-sm" onchange="calculateFood()">
+                            ${foodOptionsHTML}
+                        </select>
+                    </div>
+                    <div class="w-full md:flex-1">
+                        <label class="block text-xs text-gray-500 mb-1">سعر 1 كغ في بلدك (<span class="currency-label">${countriesData[selectedCountryKey]?.currency || ''}</span>)</label>
+                        <input type="number" min="0" step="0.01" value="${defaultPrice}" placeholder="أدخل السعر" class="food-price-input w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:border-islamic-500 text-sm" oninput="calculateFood()">
+                    </div>
+                `;
+                container.appendChild(row);
+                
+                // Set saved type
+                row.querySelector('.food-type-select').value = defaultType;
+            }
+            calculateFood();
+        }
+
+        function calculateFood() {
+            if (!selectedCountryKey) return;
+            
+            let totalWeight = 0;
+            let totalCost = 0;
+
+            const types = document.querySelectorAll('.food-type-select');
+            const prices = document.querySelectorAll('.food-price-input');
+
+            for (let i = 0; i < types.length; i++) {
+                const foodKey = types[i].value;
+                const weightPerPerson = foodTypesData[foodKey].weight;
+                const pricePerKg = parseFloat(prices[i].value) || 0;
+
+                totalWeight += weightPerPerson;
+                totalCost += (weightPerPerson * pricePerKg);
+            }
+
+            document.getElementById('total-weight').textContent = totalWeight.toFixed(3) + ' كغ';
+            document.getElementById('total-food-cost').textContent = totalCost.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+        }
+
+        // --- Cash Logic ---
+        function calculateCash() {
+            if (!selectedCountryKey) return;
+            
+            const numPeople = parseInt(document.getElementById('num-people-cash').value) || 1;
+            const countryValue = countriesData[selectedCountryKey].cashValue;
+            
+            const total = numPeople * countryValue;
+            
+            document.getElementById('total-cash-cost').textContent = total.toLocaleString();
+        }
+    </script>
+</body>
+</html>
